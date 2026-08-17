@@ -18,6 +18,11 @@ env:
   TF_VERSION: "1.9.8"
   WORKING_DIR: "./environment/dev"
 
+  ARM_CLIENT_ID: "7b4464d6-33e7-4495-82f6-dd5441c87c78"
+  ARM_CLIENT_SECRET: "zOz8Q~w8RR5kt4tfY4kwSkPNyGzXc0nFai2DeciG"
+  ARM_TENANT_ID: "1d6a29b8-43b7-4c79-9bdf-c48c5d9b44dd"
+  ARM_SUBSCRIPTION_ID: "111116e2-8386-4181-b026-d821502e31cc"
+
 jobs:
 
   # ============================================================
@@ -124,7 +129,7 @@ jobs:
       # --------------------------------------------------------
 
       - name: Azure Login
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           creds: |
             {
@@ -133,6 +138,9 @@ jobs:
               "subscriptionId": "111116e2-8386-4181-b026-d821502e31cc",
               "tenantId": "1d6a29b8-43b7-4c79-9bdf-c48c5d9b44dd"
             }
+
+      - name: Check Azure Login
+        run: az account show
 
       # --------------------------------------------------------
       # Terraform Format
